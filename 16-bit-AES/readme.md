@@ -14,4 +14,4 @@ There were two ways of solving this challenge. One way was much easier than the 
 I will first go over the proper way, and then go over the easier way.
 
 When I first connected to the server, I got the message:  
-![][image1.png]
+![](image1.png)
