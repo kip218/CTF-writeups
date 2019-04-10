@@ -27,7 +27,7 @@ If I give it the correctly encrypted ciphertext, it will give me the flag.
 
 ### Challenge solution
 
-1. Although this first step of leaking the padding scheme wasn't really necessary to solve the challenge, I decided to do it anyway.  
+Although this first step of leaking the padding scheme wasn't really necessary to solve the challenge, I decided to do it anyway.  
 Since the server is using AES-128 in ECB mode, the encryption is deterministic. If I give it the same plaintext block, it will always respond with the same ciphertext. This means that I can bruteforce the padding one character at a time. For example, if I send the following plaintext which consists of 15 'A's:
 ```
 AAAAAAAAAAAAAAA
@@ -46,3 +46,5 @@ If 'a' is the right padding character, the server will send me the same cipherte
 
 Using the above technique revealed that the padding character was just a lowercase 'x'.
 
+
+------------------------------------------------------
