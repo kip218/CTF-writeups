@@ -10,4 +10,7 @@
 
 ## Write-up
 
-Write-up here
+There are two ways of solving this challenge. One way is much easier than the other, and I doubt it was the intended solution.
+I will first go over the proper way, and then go over the easier way.
+
+
