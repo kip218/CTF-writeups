@@ -23,7 +23,7 @@ After sending some text, it asks me to encrypt some randomly generated text with
 
 ![](image2.png)
 
-If I give it the correctly encrypted ciphertext, it will give me the flag.
+If I give it the correctly encrypted ciphertext, it will give me the flag. To do this I'll have to somehow figure out what key the server is using for encryption.
 
 
 ### Challenge solution
@@ -46,6 +46,4 @@ If 'a' is the right padding character, the server will send me the same cipherte
 
 Using the above technique revealed that the padding character was just a lowercase 'x'.
 
-
 ---
-
