@@ -27,3 +27,8 @@ If I give it the correctly encrypted ciphertext, it will give me the flag.
 
 ### Challenge solution
 
+Since the server is using AES-128 in ECB mode, the encryption is deterministic. If I give it the same plaintext block, it will always respond with the same ciphertext. This means that I can bruteforce the padding one character at a time. For example, if I send the following plaintext which consists of 15 'A's:
+```
+AAAAAAAAAAAAAAA
+```
+the server will pad the plaintext with one character of padding.
