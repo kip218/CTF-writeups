@@ -4,7 +4,6 @@
 **Points:** 100  
 **Author:** ps_iclimbthings  
 **Description:**  
-
 > Why so small?
 >
 > nc archive.sunshinectf.org 19003
