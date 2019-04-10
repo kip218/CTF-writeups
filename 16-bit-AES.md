@@ -10,7 +10,7 @@
 
 ## Write-up
 
-There are two ways of solving this challenge. One way is much easier than the other, and I doubt it was the intended solution.
+There were two ways of solving this challenge. One way was much easier than the other, and I doubt it was the intended solution.  
 I will first go over the proper way, and then go over the easier way.
 
-
+When I first connected to the server, I got the message:  
