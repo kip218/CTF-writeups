@@ -10,10 +10,10 @@
 
 ## Write-up
 
-### Challenge explanation
-
 There were two ways of solving this challenge. One way was much easier than the other, and I doubt it was the intended solution.  
-I will first go over the proper way, and then go over the easier way.
+I will first explain the proper way, and then go over the easier way.
+
+### Challenge explanation
 
 When I first connect to the server, I get the following message: 
 
