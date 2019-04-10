@@ -1,10 +1,9 @@
 # CTF-name year : challenge-name 
 
-**Category:** 
-**Points:** 
-**Author:** 
-**Description:** 
-
+**Category:**  
+**Points:**  
+**Author:**  
+**Description:**  
 >
 >
 >
