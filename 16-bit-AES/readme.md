@@ -8,13 +8,13 @@
 >
 > nc archive.sunshinectf.org 19003
 
-## Write-up
 
+## Write-up
 There were two ways of solving this challenge. One way was much easier than the other, and I doubt it was the intended solution.  
 I will first explain the proper way, and then go over the easier way.
 
-### Challenge explanation
 
+### Challenge explanation
 When I first connect to the server, I get the following message: 
 
 ![](image1.png)
@@ -25,8 +25,8 @@ After sending some text, it asks me to encrypt some randomly generated text with
 
 If I give it the correctly encrypted ciphertext, it will give me the flag.
 
-### Challenge solution
 
+### Challenge solution
 Although this first step of leaking the padding scheme wasn't really necessary to solve the challenge, I decided to do it anyway.  
 Since the server is using AES-128 in ECB mode, the encryption is deterministic. If I give it the same plaintext block, it will always respond with the same ciphertext. This means that I can bruteforce the padding one character at a time. For example, if I send the following plaintext which consists of 15 'A's:
 ```
@@ -47,4 +47,5 @@ If 'a' is the right padding character, the server will send me the same cipherte
 Using the above technique revealed that the padding character was just a lowercase 'x'.
 
 
-------------------------------------------------------
+---
+
