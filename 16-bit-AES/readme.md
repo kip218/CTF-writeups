@@ -10,6 +10,8 @@
 
 ## Write-up
 
+### Challenge explanation
+
 There were two ways of solving this challenge. One way was much easier than the other, and I doubt it was the intended solution.  
 I will first go over the proper way, and then go over the easier way.
 
@@ -20,4 +22,8 @@ When I first connect to the server, I get the following message:
 After sending some text, it asks me to encrypt some randomly generated text with the same key: 
 
 ![](image2.png)
+
+If I give it the correctly encrypted ciphertext, it will give me the flag.
+
+### Challenge solution
 
