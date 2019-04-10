@@ -1,11 +1,8 @@
 # SunshineCTF 2019 : 16-bit-AES
 
-**Category:** Crypto
-
+**Category:** Crypto \n
 **Points:** 100
-
 **Author:** ps_iclimbthings
-
 **Description:** 
 
 > Why so small?
