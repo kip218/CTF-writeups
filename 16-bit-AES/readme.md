@@ -74,3 +74,41 @@ bruteforce_key(plaintext, ciphertext)
 # The AES key is fLfLfLfLfLfLfLfL
 # Time to write the solver!
 ```
+
+Bruteforcing reveals the AES key to be 'fLfLfLfLfLfLfLfL'.  
+All I have to do now is to connect to the server, encrypt the plaintext with the key, and send it to the server.
+
+```python
+from pwn import *
+from Crypto.Cipher import AES
+
+# Set up AES with the key we found
+key = 'fLfLfLfLfLfLfLfL'
+cipher = AES.new(key, AES.MODE_ECB)
+
+# Connect to the server and give the answer!
+c = remote("aes.sunshinectf.org", 4200)
+c.recvuntil('Your text: \r\n')
+c.sendline()
+c.recvuntil('Ok, now encrypt this text with the same key: ')
+plaintext = c.recvuntil('\r\n').strip()
+ciphertext = cipher.encrypt(plaintext).hex()
+print(f"Plaintext: {plaintext}\nCiphertext: {ciphertext}")
+c.sendline(ciphertext)
+print(c.recv())
+c.close()
+```
+
+Running the solver above gives us the flag.
+
+![](image3.png)
+
+---
+The easier solution is a little disappointing.  
+The server enables me to encrypt any plaintext of our choice with its key. It also gives me the flag if I'm able to encrypt some randomly generated plaintext sent from the server. With this, all I have to do to get the flag is run two connections to the server, receive the randomly generated plaintext from one connection, and use the other connection to encrypt that plaintext, which gives me the correct ciphertext. If I send the ciphertext to the first connection, I get the flag.
+
+![](image4.png)
+
+![](image5.png)
+
+![](image6.png)
