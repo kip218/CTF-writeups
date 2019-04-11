@@ -9,8 +9,8 @@ ciphertext = 'f4e8258d6c9930b9fc423b7df6c96739'
 
 
 def bruteforce_key(plaintext, ciphertext):
-    for i in range(65, 123):
-        for j in range(65, 123):
+    for i in range(256):
+        for j in range(256):
             key = chr(i) + chr(j)
             key *= 8
             cipher = AES.new(key, AES.MODE_ECB)

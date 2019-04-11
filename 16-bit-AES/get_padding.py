@@ -16,8 +16,7 @@ def get_cipher(plaintext):
 # bruteforce a character of the padding
 def brute_char(num, known_padding):
     c_padded = get_cipher('A' * num + known_padding)
-    # from 'A' to 'z'
-    for i in range(65, 123):
+    for i in range(256):
         payload = 'A' * num + known_padding
         payload += chr(i)
         c_test = get_cipher(payload)

@@ -23,11 +23,11 @@ After sending some text, it asks me to encrypt some randomly generated text with
 
 ![](image2.png)
 
-If I give it the correctly encrypted ciphertext, it will give me the flag. To do this I'll have to somehow figure out what key the server is using for encryption.
+If I give it the correctly encrypted ciphertext, it will give me the flag. To do this I'll have to somehow figure out the key that the server is using for encryption.
 
 
 ### Challenge solution
-Although this first step of leaking the padding scheme wasn't really necessary to solve the challenge, I decided to do it anyway.  
+Although this first step of leaking the padding scheme wasn't really necessary to solve the challenge, I decided to do it anyway. The more I know about the challenge, the better.  
 Since the server is using AES-128 in ECB mode, the encryption is deterministic. If I give it the same plaintext block, it will always respond with the same ciphertext. This means that I can bruteforce the padding one character at a time. For example, if I send the following plaintext which consists of 15 'A's:
 ```
 AAAAAAAAAAAAAAA
@@ -42,8 +42,35 @@ Now, since the encryption method is deterministic, I can bruteforce that last ch
 ```
 AAAAAAAAAAAAAAAa
 ```
-If 'a' is the right padding character, the server will send me the same ciphertext as it did when I sent only 15 'A's as the plaintext. If not, I can move on to the next possible character and continue bruteforcing.
+If 'a' is the right padding character, the server will send me the same ciphertext as it did when I sent only 15 'A's as the plaintext. If not, I can move on to the next possible character and continue bruteforcing all possible byte values.
 
-Using the above technique revealed that the padding character was just a lowercase 'x'.
+Using the above technique reveals that the padding character is just a lowercase 'x'. Not too useful, but now I know that there's nothing special hidden in the padding.
 
 ---
+At this point, the name of the challenge comes to my attention. A 16-bit key means a 2-byte key. For a block cipher like AES, that's not possible. The key needs to be as long as each block, which is 16 bytes. It's possible that the server just repeats the 2-byte key 8 times to get a 16-byte key, which it then uses to encrypt our plaintext. This means that if I find the correct 2 bytes, I have the key.
+
+```python
+from pwn import *
+from Crypto.Cipher import AES
+
+# We know that the padding is just 'x'
+# We can get the ciphertext of 'xxxxxxxxxxxxxxxx', which is 'f4e8258d6c9930b9fc423b7df6c96739'
+plaintext = 'x' * 16
+ciphertext = 'f4e8258d6c9930b9fc423b7df6c96739'
+
+def bruteforce_key(plaintext, ciphertext):
+    for i in range(256):
+        for j in range(256):
+            key = chr(i) + chr(j)
+            key *= 8
+            cipher = AES.new(key, AES.MODE_ECB)
+            msg = cipher.encrypt(plaintext)
+            msg = msg.hex()
+            if msg == ciphertext:
+                print(f"Plaintext: {plaintext}\nCiphertext: {ciphertext}\nMsg: {msg}\nKey: {key}")
+
+bruteforce_key(plaintext, ciphertext)
+
+# The AES key is fLfLfLfLfLfLfLfL
+# Time to write the solver!
+```
